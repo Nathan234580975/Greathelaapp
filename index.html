@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GREATHELA - Plateforme de Marketing d'Affiliation et Formation IA</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #2ecc71;
+            --secondary: #3498db;
+            --accent: #f39c12;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+            background-color: #f8f9fa;
+            line-height: 1.6;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48ZyBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMjU1LDI1NSwyNTUsMC4wNykiIHN0cm9rZS13aWR0aD0iMiI+PGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMTQiLz48Y2lyY2xlIGN4PSIzMCIgY3k9IjMwIiByPSIyMCIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMzAiIHI9IjI2Ii8+PC9nPjwvc3ZnPg==');
+            opacity: 0.3;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .feature-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .cta-section {
+            background-color: var(--dark);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIj48cGF0aCBkPSJNMzAgMTVjLTguMjggMC0xNSA2LjcyLTE1IDE1czYuNzIgMTUgMTUgMTUgMTUtNi43MiAxNS0xNS02LjcyLTE1LTE1LTE1eiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMDUpIiBzdHJva2Utd2lkdGg9IjIiLz48L3N2Zz4=');
+            opacity: 0.1;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 12px 30px;
+            font-weight: bold;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #27ae60;
+            border-color: #27ae60;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline-light {
+            border-radius: 50px;
+            padding: 12px 30px;
+            transition: all 0.3s;
+        }
+        
+        .btn-outline-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .testimonial::before {
+            content: '\201C';
+            font-size: 60px;
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: rgba(46, 204, 113, 0.2);
+            font-family: Arial;
+        }
+        
+        .affiliation-level {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: all 0.3s;
+            margin-bottom: 20px;
+            height: 100%;
+        }
+        
+        .affiliation-level:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .level-1 {
+            border-top: 5px solid #f39c12;
+        }
+        
+        .level-2 {
+            border-top: 5px solid #3498db;
+        }
+        
+        .level-3 {
+            border-top: 5px solid #2ecc71;
+        }
+        
+        .commission-badge {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .level-1 .commission-badge {
+            background: rgba(243, 156, 18, 0.2);
+            color: #f39c12;
+        }
+        
+        .level-2 .commission-badge {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+        
+        .level-3 .commission-badge {
+            background: rgba(46, 204, 113, 0.2);
+            color: #2ecc71;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .course-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .course-body {
+            padding: 20px;
+        }
+        
+        .course-footer {
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        .badge-premium {
+            background: linear-gradient(135deg, #f39c12 0%, #e74c3c 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .modal-content {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            border: none;
+        }
+        
+        .modal-footer {
+            border: none;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #27ae60;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .hero {
+                padding: 80px 0;
+            }
+            
+            .display-4 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#" style="color: var(--primary);">
+                <i class="fas fa-rocket me-2"></i>GREATHELA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#presentation">Présentation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#formations">Formations IA</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gains">Gains</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#strategies">Stratégies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#affiliation">Affiliation</a>
+                    </li>
+                    <li class="nav-item ms-2">
+                        <a class="btn btn-primary" href="#inscription">Rejoindre Maintenant</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">Générez des revenus quotidiens avec GREATHELA</h1>
+            <p class="lead mb-4">Même sans compétences techniques, diplôme ou investissement important</p>
+            <a href="#inscription" class="btn btn-light btn-lg px-5 py-3 fw-bold me-3">Commencer dès maintenant</a>
+            <a href="#formations" class="btn btn-outline-light btn-lg px-5 py-3">Formations Gratuites</a>
+        </div>
+    </section>
+
+    <!-- Presentation Section -->
+    <section id="presentation" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Qu'est-ce que GREATHELA?</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h3><i class="fas fa-laptop-code me-2"></i>Plateforme 100% digitale</h3>
+                        <p>GREATHELA est conçu pour vous permettre de gagner de l'argent en ligne chaque jour, même sans compétences techniques, diplôme ou moyens financiers importants.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h3><i class="fas fa-users me-2"></i>Accessible à tous</h3>
+                        <p>Une plateforme intuitive, rapide à utiliser et rentable dès les premières actions. Plus qu'un simple business, c'est un véritable écosystème digital!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <span class="stats-number">100%</span>
+                        <p>Digital et accessible</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <span class="stats-number">3000</span>
+                        <p>FCFA seulement pour commencer</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="text-center">
+                        <span class="stats-number">24/7</span>
+                        <p>Revenus possibles</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formations IA Section -->
+    <section id="formations" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Formations Gratuites: Gagner avec l'IA</h2>
+            <p class="text-center mb-5">Découvrez nos formations exclusives sur l'utilisation de l'IA pour générer des revenus en ligne</p>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h4><i class="fas fa-robot me-2"></i>Introduction à l'IA</h4>
+                        </div>
+                        <div class="course-body">
+                            <p>Comprendre les bases de l'intelligence artificielle et son potentiel pour générer des revenus en ligne.</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Concepts fondamentaux de l'IA</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Outils IA accessibles à tous</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Cas pratiques d'utilisation</li>
+                            </ul>
+                        </div>
+                        <div class="course-footer">
+                            <button class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#formationModal" data-formation="Introduction à l'IA">Accéder gratuitement</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h4><i class="fas fa-coins me-2"></i>IA et Marketing Digital</h4>
+                        </div>
+                        <div class="course-body">
+                            <p>Apprenez à utiliser l'IA pour optimiser vos stratégies marketing et augmenter vos revenus.</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Automatisation marketing avec IA</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Création de contenu assistée par IA</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Analyse de données et prédictions</li>
+                            </ul>
+                        </div>
+                        <div class="course-footer">
+                            <button class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#formationModal" data-formation="IA et Marketing Digital">Accéder gratuitement</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4">
+                    <div class="course-card">
+                        <div class="course-header">
+                            <h4><i class="fas fa-chart-line me-2"></i>Monétisation avec l'IA</h4>
+                        </div>
+                        <div class="course-body">
+                            <p>Découvrez des méthodes concrètes pour générer des revenus grâce aux outils d'intelligence artificielle.</p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Création de business automatisés</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Services IA rémunérateurs</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle text-success me-2"></i>Optimisation des revenus existants</li>
+                            </ul>
+                        </div>
+                        <div class="course-footer">
+                            <button class="btn btn-sm btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#formationModal" data-formation="Monétisation avec l'IA">Accéder gratuitement</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <div class="alert alert-info">
+                    <h5><i class="fas fa-gift me-2"></i>Formations Complètes Disponibles</h5>
+                    <p class="mb-0">En vous inscrivant à GREATHELA, vous accédez à des formations avancées sur l'IA et des stratégies exclusives pour maximiser vos revenus en ligne!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tasks Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Comment gagner avec GREATHELA?</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box text-center">
+                        <h4><i class="fas fa-tasks fa-2x mb-3"></i><br>📱 Tâches simples</h4>
+                        <p>Lire et partager du contenu, répondre à des enquêtes, regarder des vidéos</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box text-center">
+                        <h4><i class="fas fa-network-wired fa-2x mb-3"></i><br>👥 Système de parrainage</h4>
+                        <p>Gagnez des commissions sur plusieurs niveaux de votre réseau</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="feature-box text-center">
+                        <h4><i class="fas fa-video fa-2x mb-3"></i><br>💡 Création de contenu</h4>
+                        <p>Montrez vos résultats et attirez plus de membres dans votre équipe</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gains Section -->
+    <section id="gains" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Gains quotidiens dépassant 20,000 FCFA</h2>
+            <div class="row">
+                <div class="col-md-8 mx-auto">
+                    <canvas id="gainsChart" height="150"></canvas>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-6">
+                    <h4>Exemple de gains journaliers</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item">Tâches simples: 5,000 - 7,000 FCFA</li>
+                        <li class="list-group-item">Parrainage niveau 1: 8,000 - 10,000 FCFA</li>
+                        <li class="list-group-item">Parrainage niveau 2: 4,000 - 5,000 FCFA</li>
+                        <li class="list-group-item">Parrainage niveau 3: 2,000 - 3,000 FCFA</li>
+                        <li class="list-group-item list-group-item-success fw-bold">Total: 19,000 - 25,000 FCFA/jour</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <h4>Projection mensuelle</h4>
+                    <div class="card">
+                        <div class="card-body">
+                            <p>Avec seulement 5 parrainages directs par mois et un réseau qui se développe:</p>
+                            <ul>
+                                <li>1er mois: 150,000 - 200,000 FCFA</li>
+                                <li>2ème mois: 350,000 - 500,000 FCFA</li>
+                                <li>3ème mois: 600,000 - 900,000 FCFA</li>
+                            </ul>
+                            <p class="fst-italic">Ces chiffres sont basés sur des résultats réels de membres actifs.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Affiliation Section -->
+    <section id="affiliation" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Système de parrainage à 3 niveaux</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="affiliation-level level-1">
+                        <span class="commission-badge">NIVEAU 1</span>
+                        <h3>1,300 FCFA</h3>
+                        <p>Par personne directement parrainée avec votre lien</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="affiliation-level level-2">
+                        <span class="commission-badge">NIVEAU 2</span>
+                        <h3>700 FCFA</h3>
+                        <p>Par personne parrainée par vos filleuls</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="affiliation-level level-3">
+                        <span class="commission-badge">NIVEAU 3</span>
+                        <h3>300 FCFA</h3>
+                        <p>Par personne de la deuxième génération</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <h4>Visualisation du système à 3 niveaux</h4>
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgODAwIDMwMCI+PHBhdGggZD0iTTQwMCA1MCBMNDAwIDE1MCBMNDAwIDI1MCIgc3Ryb2tlPSIjMzQ5OGQiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiIvPjxjaXJjbGUgY3g9IjQwMCIgY3k9IjUwIiByPSIyMCIgZmlsbD0iI2YzOWMxMiIvPjx0ZXh0IHg9IjQwMCIgeT0iNTAiI�leHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNmZmYiIGZvbnQtc2l6ZT0iMTIiIGR5PSIuM2VtIj5Wb3VzPC90ZXh0PjxjaXJjbGUgY3g9IjMwMCIgY3k9IjE1MCIgcj0iMjAiIGZpbGw9IiMzNDk4YiIvPjx0ZXh0IHg9IjMwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIiBmb250LXNpemU9IjEyIiBkeT0iLjNlbSI+TGlldSAxPC90ZXh0PjxjaXJjbGUgY3g9IjUwMCIgY3k9IjE1MCIgcj0iMjAiIGZpbGw9IiMzNDk4YiIvPjx0ZXh0IHg9IjUwMCIgeT0iMTUwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjZmZmIiBmb250LXNpemU9IjEyIiBkeT0iLjNlbSI+TGlldSAyPC90ZXh0PjxjaXJjbGUgY3g9IjIwMCIgY3k9IjI1MCIgcj0iMjAiIGZpbGw9IiMyZWNjNzEiLz48dGV4dCB4PSIyMDAiIHk9IjI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1zaXplPSIxMiIgZHk9Ii4zZW0iPk4uMyAxPC90ZXh0PjxjaXJjbGUgY3g9IjQwMCIgY3k9IjI1MCIgcj0iMjAiIGZpbGw9IiMyZWNjNzEiLz48dGV4dCB4PSI0MDAiIHk9IjI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1zaXplPSIxMiIgZHk9Ii4zZW0iPk4uMyAyPC90ZXh0PjxjaXJjbGUgY3g9IjYwMCIgY3k9IjI1MCIgcj0iMjAiIGZpbGw9IiMyZWNjNzEiLz48dGV4dCB4PSI2MDAiIHk9IjI1MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2ZmZiIgZm9udC1zaXplPSIxMiIgZHk9Ii4zZW0iPk4uMyAzPC90ZXh0PjxwYXRoIGQ9Ik0zMDAgMTUwIEwyMDAgMjUwIiBzdHJva2U9IiMzNDk4ZCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHBhdGggZD0iTTMwMCAxNTAgTDQwMCAyNTAiIHN0cm9rZT0iIzM0OThkIiBmaWxsPSJub25lIiBzdHJva2Utd2lkdGgPSIyIi8+PHBhdGggZD0iTTUwMDE1MCBMNDAwIDI1MCIgc3Ryb2tlPSIjMzQ5OGQiIGZpbGw9Im5vbmUiIHN0cm9rZS13aWR0aD0iMiIvPjxwYXRoIGQ9Ik01MDAgMTUwIEw2MDAgMjUwIiBzdHJva2U9IiMzNDk4ZCIgZmlsbD0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIyIi8+PHRleHQgeD0iMjUwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzNDk4ZCIgZm9udC1zaXplPSIxMiI+MS4zMDBGQ0ZBPC90ZXh0Pjx0ZXh0IHg9IjM1MCIgeT0iMjAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzQ5OGQiIGZvbnQtc2l6ZT0iMTIiPjcwMEZDRkE8L3RleHQ+PHRleHQgeD0iNDUwIiB5PSIyMDAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMzNDk4ZCIgZm9udC1zaXplPSIxMiI+NzAwRkNGRjwvdGV4dD48dGV4dCB4PSI1NTAiIHk9IjIwMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzM0OThkIiBmb250LXNpemU9IjEyIj4zMDBGQ0ZBPC90ZXh0Pjwvc3ZnPg==" class="img-fluid" alt="Système de parrainage à 3 niveaux">
+            </div>
+        </div>
+    </section>
+
+    <!-- Strategies Section -->
+    <section id="strategies" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Mes stratégies pour réussir avec GREATHELA</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h4><i class="fas fa-calendar-check me-2"></i>🚀 Action quotidienne</h4>
+                        <p>Je me connecte tous les jours pour accomplir les missions simples. Plus vous êtes actif, plus vous gagnez!</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h4><i class="fas fa-bullseye me-2"></i>👥 Parrainage intelligent</h4>
+                        <p>Je cible des personnes motivées qui ont vraiment besoin de revenus supplémentaires. Je partage mon expérience et mes résultats.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h4><i class="fas fa-film me-2"></i>📱 Création de contenu</h4>
+                        <p>Je montre mes gains réels sur les réseaux sociaux. Des preuves tangibles attirent naturellement des nouveaux membres.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="feature-box">
+                        <h4><i class="fas fa-chalkboard-teacher me-2"></i>💡 Formation de mon équipe</h4>
+                        <p>J'accompagne mes filleuls pour qu'ils réussissent aussi. Leur succès augmente mes revenus!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-5">
+                <h4 class="text-center mb-4">Plan d'action pour les 30 premiers jours</h4>
+                <div class="row">
+                    <div class="col-md-3 col-6 text-center mb-4">
+                        <div class="bg-primary text-white rounded-circle p-3 mx-auto d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <h5 class="mb-0">J1-7</h5>
+                        </div>
+                        <p class="mt-2">Compléter toutes les tâches quotidiennes</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center mb-4">
+                        <div class="bg-success text-white rounded-circle p-3 mx-auto d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <h5 class="mb-0">J8-14</h5>
+                        </div>
+                        <p class="mt-2">Parrainer 3-5 personnes</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center mb-4">
+                        <div class="bg-warning text-white rounded-circle p-3 mx-auto d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <h5 class="mb-0">J15-21</h5>
+                        </div>
+                        <p class="mt-2">Créer du contenu régulièrement</p>
+                    </div>
+                    <div class="col-md-3 col-6 text-center mb-4">
+                        <div class="bg-info text-white rounded-circle p-3 mx-auto d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <h5 class="mb-0">J22-30</h5>
+                        </div>
+                        <p class="mt-2">Former son équipe et amplifier</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title">Témoignages de membres</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial">
+                        <p class="fst-italic">"En seulement 3 semaines, je gagne plus de 15,000 FCFA par jour. La plateforme est si simple à utiliser!"</p>
+                        <p class="fw-bold">- Marie, Douala</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial">
+                        <p class="fst-italic">"J'ai construit une équipe de 25 personnes en un mois. Les commissions passives changent tout!"</p>
+                        <p class="fw-bold">- Pascal, Yaoundé</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial">
+                        <p class="fst-italic">"Même avec mon emploi à temps plein, je génère un revenu supplémentaire conséquent chaque jour."</p>
+                        <p class="fw-bold">- Aïcha, Dakar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="inscription" class="cta-section">
+        <div class="container position-relative">
+            <h2 class="mb-4">Prêt à commencer?</h2>
+            <p class="lead mb-4">Rejoignez GREATHELA aujourd'hui et commencez à générer des revenus dès demain!</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card text-dark">
+                        <div class="card-body p-5">
+                            <h3 class="card-title mb-4">Inscription en 3 étapes simples</h3>
+                            <ol class="list-group list-group-numbered list-group-flush">
+                                <li class="list-group-item">Cliquez sur le lien d'inscription ci-dessous</li>
+                                <li class="list-group-item">Payez les frais d'inscription de 3000 FCFA</li>
+                                <li class="list-group-item">Commencer les missions et parrainer d'autres personnes</li>
+                            </ol>
+                            <div class="text-center mt-4">
+                                <a href="https://greathela.com/register/nathan2370" class="btn btn-primary btn-lg px-5">Rejoindre GREATHELA Maintenant</a>
+                                <p class="small mt-3">Votre lien de parrainage: <span class="text-primary">https://greathela.com/register/nathan2370</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Questions Fréquentes</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            Combien de temps par jour dois-je consacrer à GREATHELA?
+                        </button>
+                    </h2>
+                    <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Seulement 30 à 60 minutes par jour suffisent pour compléter les missions et gérer votre équipe. Vous pouvez y consacrer plus de temps pour accélérer vos gains.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            Comment sont versés les gains?
+                        </button>
+                    </h2>
+                    <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Les gains sont crédités quotidiennement sur votre compte GREATHELA et peuvent être retirés via Mobile Money, transfert bancaire ou autres méthodes disponibles dans votre pays.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            Dois-je avoir beaucoup d'abonnés sur les réseaux sociaux?
+                        </button>
+                    </h2>
+                    <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Pas du tout! Beaucoup de membres réussissent en partageant simplement avec leur entourage proche (famille, amis, collègues). La qualité des contacts prime sur la quantité.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            Comment accéder aux formations complètes sur l'IA?
+                        </button>
+                    </h2>
+                    <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Les formations complètes sur l'IA et les stratégies avancées sont accessibles gratuitement à tous les membres inscrits sur GREATHELA. Une fois inscrit, vous recevrez un accès personnel à l'espace formation.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5><i class="fas fa-rocket me-2"></i>GREATHELA</h5>
+                    <p>Plateforme de marketing d'affiliation et de gains en ligne accessible à tous.</p>
+                    <div class="mt-3">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Liens rapides</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#presentation" class="text-white">Présentation</a></li>
+                        <li><a href="#formations" class="text-white">Formations IA</a></li>
+                        <li><a href="#gains" class="text-white">Gains</a></li>
+                        <li><a href="#strategies" class="text-white">Stratégies</a></li>
+                        <li><a href="#affiliation" class="text-white">Affiliation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contact</h5>
+                    <p><i class="fas fa-link me-2"></i>Rejoindre mon équipe: <a href="https://chat.whatsapp.com/FDZQ5lUJv4uBR0Ir35Cbhd?mode=ems_copy_t" class="text-white">Groupe WhatsApp</a></p>
+                    <p><i class="fas fa-phone me-2"></i>Téléphone: +237 672428288</p>
+                    <p><i class="fas fa-envelope me-2"></i>Email: support@greathela.com</p>
+                </div>
+            </div>
+            <hr class="bg-light">
+            <p class="text-center mb-0">© 2025 GREATHELA - Tous droits réservés</p>
+        </div>
+    </footer>
+
+    <!-- Formation Modal -->
+    <div class="modal fade" id="formationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formationModalTitle">Formation GRATUITE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 id="formationName"></h4>
+                    <div class="alert alert-info">
+                        <p><strong>Formation complète disponible!</strong> Cette formation gratuite n'est qu'un aperçu. En vous inscrivant à GREATHELA, vous accéderez à la formation complète avec:</p>
+                        <ul>
+                            <li>Vidéos détaillées pas à pas</li>
+                            <li>Exercices pratiques et études de cas</li>
+                            <li>Support personnalisé pour vos questions</li>
+                            <li>Stratégies avancées de monétisation</li>
+                        </ul>
+                    </div>
+                    <div id="formationContent">
+                        <!-- Le contenu de la formation sera inséré ici par JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                    <a href="#inscription" class="btn btn-primary" data-bs-dismiss="modal">Accéder aux formations complètes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Graphique des gains
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('gainsChart').getContext('2d');
+            const gainsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'],
+                    datasets: [{
+                        label: 'Gains journaliers (FCFA)',
+                        data: [21500, 22800, 24200, 23100, 25600, 27300, 19800],
+                        backgroundColor: 'rgba(46, 204, 113, 0.7)',
+                        borderColor: 'rgba(46, 204, 113, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Gains en FCFA'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Back to top button
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('active');
+                } else {
+                    backToTopButton.classList.remove('active');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // Formation Modal
+            const formationModal = document.getElementById('formationModal');
+            formationModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const formationName = button.getAttribute('data-formation');
+                const modalTitle = formationModal.querySelector('.modal-title');
+                const formationNameElement = formationModal.querySelector('#formationName');
+                const formationContent = formationModal.querySelector('#formationContent');
+                
+                modalTitle.textContent = formationName;
+                formationNameElement.textContent = formationName;
+                
+                // Contenu de la formation en fonction du nom
+                let content = '';
+                
+                if (formationName === 'Introduction à l\'IA') {
+                    content = `
+                        <h5>Contenu de cette formation:</h5>
+                        <ul>
+                            <li>Comprendre ce qu'est l'Intelligence Artificielle</li>
+                            <li>Les différents types d'IA et leurs applications</li>
+                            <li>Outils IA gratuits pour débutants</li>
+                            <li>Cas pratiques: comment l'IA peut générer des revenus</li>
+                        </ul>
+                        <div class="alert alert-warning">
+                            <i class="fas fa-lock me-2"></i> La suite de cette formation avec des exercices pratiques et des démonstrations vidéo est disponible pour les membres GREATHELA.
+                        </div>
+                    `;
+                } else if (formationName === 'IA et Marketing Digital') {
+                    content = `
+                        <h5>Contenu de cette formation:</h5>
+                        <ul>
+                            <li>Automatiser votre marketing avec des outils IA</li>
+                            <li>Créer du contenu engageant grâce à l'IA</li>
+                            <li>Analyser les données de marché avec l'IA</li>
+                            <li>Optimiser les campagnes publicitaires</li>
+                        </ul>
+                        <div class="alert alert-warning">
+                            <i class="fas fa-lock me-2"></i> Les stratégies avancées et les outils exclusifs sont réservés aux membres GREATHELA.
+                        </div>
+                    `;
+                } else if (formationName === 'Monétisation avec l\'IA') {
+                    content = `
+                        <h5>Contenu de cette formation:</h5>
+                        <ul>
+                            <li>Les business models rentables avec l'IA</li>
+                            <li>Créer des services IA rémunérateurs</li>
+                            <li>Plateformes pour monétiser vos compétences IA</li>
+                            <li>Automatisation des revenus passifs</li>
+                        </ul>
+                        <div class="alert alert-warning">
+                            <i class="fas fa-lock me-2"></i> Les études de cas détaillées et les stratégies concrètes sont accessibles après inscription.
+                        </div>
+                    `;
+                }
+                
+                formationContent.innerHTML = content;
+            });
+        });
+    </script>
+</body>
+</html>
